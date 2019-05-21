@@ -9,6 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class TodosService {
 
@@ -45,6 +46,57 @@ public class TodosService {
 
 
         }
+
+
+
+    void createToDo(Todo todo){
+
+        jsonPlaceHolderApi.createToDo(todo).enqueue(new Callback<Todo>() {
+            @Override
+            public void onResponse(Call<Todo> call, Response<Todo> response) {
+                System.out.println("Todo created");
+            }
+
+            @Override
+            public void onFailure(Call<Todo> call, Throwable throwable) {
+                System.out.println("something went wrong. Reason: " + throwable.getMessage());
+
+            }
+        });
+
+
+    }
+
+    void updateToDo(Todo todo, int id){
+
+        jsonPlaceHolderApi.updateToDo(todo, id).enqueue(new Callback<Todo>() {
+            @Override
+            public void onResponse(Call<Todo> call, Response<Todo> response) {
+                System.out.println("updated id: " + id);
+            }
+
+            @Override
+            public void onFailure(Call<Todo> call, Throwable throwable) {
+
+            }
+        });
+    }
+
+    void deleteToDo(int id){
+
+        jsonPlaceHolderApi.deletedToDo(id).enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                System.out.println("id " + id + " deleted");
+
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable throwable) {
+
+            }
+        });
+    }
 
 
 }
